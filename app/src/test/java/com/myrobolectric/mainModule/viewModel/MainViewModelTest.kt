@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import org.hamcrest.MatcherAssert
+import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers
 import org.junit.Rule
 import org.junit.Test
@@ -34,8 +34,8 @@ class MainViewModelTest{
             val result = mainViewModel.isWelcome().value
 
             //sintaxis: assertThat(Valor Actual, Valor Esperado)
-            MatcherAssert.assertThat(result, Matchers.not(Matchers.nullValue()))  //que no sea null
-            MatcherAssert.assertThat(result, Matchers.`is`(true))  //asegurar que sea boolean (true)
+            assertThat(result, Matchers.not(Matchers.nullValue()))  //que no sea null
+            assertThat(result, Matchers.`is`(true))  //asegurar que sea boolean (true)
         } finally {
             mainViewModel.isWelcome().removeObserver(observer)
         }
