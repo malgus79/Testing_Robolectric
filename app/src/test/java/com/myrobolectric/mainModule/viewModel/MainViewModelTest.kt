@@ -11,7 +11,9 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 
-@Config(sdk = [29])
+//@Config(sdk = [21, 22, 30])
+//@Config(maxSdk = 30)
+@Config(sdk = [30])
 @RunWith(AndroidJUnit4::class)
 class MainViewModelTest{
     //arquitectura de componentes agregada para el testing
