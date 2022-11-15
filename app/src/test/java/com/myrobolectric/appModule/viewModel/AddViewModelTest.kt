@@ -1,12 +1,11 @@
-package com.myrobolectric
+package com.myrobolectric.appModule.viewModel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.myrobolectric.appModule.viewModel.AddViewModel
 import com.myrobolectric.entities.Product
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers.*
+import org.hamcrest.MatcherAssert
+import org.hamcrest.Matchers
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -48,7 +47,7 @@ class AddViewModelTest{
             //hacer las aserciones
 
             //sintaxis: assertThat(Valor Actual, Valor Esperado)
-            assertThat(result, `is`(true))
+            MatcherAssert.assertThat(result, Matchers.`is`(true))
             //assertThat(result, not(nullValue()))// opcional: acegurar de que no sea null el valor (no importa si es true/false, solo importa que cambie)
         } finally {
             //liberar el observador
