@@ -29,6 +29,7 @@ class AddProductFragmentTest{
         }
     }
 
+    //test: evento de click. Al darle cancelar -> dialog se vuelve null (desaparece)
     @Test
     fun cancelDialog_isNullTest(){
         val scenario = launchFragment<AddProductFragment>(themeResId = R.style.Theme_MyRobolectric)
