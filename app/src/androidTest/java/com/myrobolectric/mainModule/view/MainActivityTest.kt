@@ -38,23 +38,23 @@ class MainActivityTest {
             .check(matches(withText(snackbarMsg)))
     }
 
-    //test:
+    //test: evento de click en el snackbar retornando un mensaje
     @Test
-    fun contextMenu_menuItemClick_returnsMsg() {
+    fun contextMenu_menuItemClick_returnsMsg(){
         onView(withId(R.id.recyclerView)).perform(click())
 
         openActionBarOverflowOrOptionsMenu(ApplicationProvider.getApplicationContext())
 
-//        var snackbarMsg = ""
-//        var itemMenuTitle = ""
-//        activityScenarioRule.scenario.onActivity { activity ->
-//            snackbarMsg = activity.resources.getString(R.string.main_msg_go_exit)
-//            itemMenuTitle = activity.resources.getString(R.string.main_menu_title_exit)
-//        }
+        var snackbarMsg = ""
+        var itemMenuTitle = ""
+        activityScenarioRule.scenario.onActivity { activity ->
+            snackbarMsg = activity.resources.getString(R.string.main_msg_go_exit)
+            itemMenuTitle = activity.resources.getString(R.string.main_menu_title_exit)
+        }
 
-        onView(withText("Exit…")).perform(click())
+        onView(withText(itemMenuTitle)).perform(click())
 
         onView(withId(com.google.android.material.R.id.snackbar_text))
-            .check(matches(withText("Exit…")))
+            .check(matches(withText(snackbarMsg)))
     }
 }
