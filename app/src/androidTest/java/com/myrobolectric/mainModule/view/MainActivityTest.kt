@@ -29,13 +29,13 @@ class MainActivityTest {
 
         onView(withId(R.id.action_history)).perform(click())
 
-//        var snackbarMsg = ""
-//        activityScenarioRule.scenario.onActivity { activity ->
-//            snackbarMsg = activity.resources.getString(R.string.main_msg_go_history)
-//        }
+        var snackbarMsg = ""
+        activityScenarioRule.scenario.onActivity { activity ->
+            snackbarMsg = activity.resources.getString(R.string.main_msg_go_history)
+        }
 
         onView(withId(com.google.android.material.R.id.snackbar_text))
-            .check(matches(withText("Go to history…")))
+            .check(matches(withText(snackbarMsg)))
     }
 
     //test:
