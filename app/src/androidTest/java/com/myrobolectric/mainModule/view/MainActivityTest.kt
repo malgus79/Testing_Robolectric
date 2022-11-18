@@ -1,7 +1,9 @@
 package com.myrobolectric.mainModule.view
 
 
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.*
 import androidx.test.espresso.matcher.ViewMatchers.*
@@ -34,5 +36,25 @@ class MainActivityTest {
 
         onView(withId(com.google.android.material.R.id.snackbar_text))
             .check(matches(withText("Go to history…")))
+    }
+
+    //test:
+    @Test
+    fun contextMenu_menuItemClick_returnsMsg() {
+        onView(withId(R.id.recyclerView)).perform(click())
+
+        openActionBarOverflowOrOptionsMenu(ApplicationProvider.getApplicationContext())
+
+//        var snackbarMsg = ""
+//        var itemMenuTitle = ""
+//        activityScenarioRule.scenario.onActivity { activity ->
+//            snackbarMsg = activity.resources.getString(R.string.main_msg_go_exit)
+//            itemMenuTitle = activity.resources.getString(R.string.main_menu_title_exit)
+//        }
+
+        onView(withText("Exit…")).perform(click())
+
+        onView(withId(com.google.android.material.R.id.snackbar_text))
+            .check(matches(withText("Exit…")))
     }
 }
