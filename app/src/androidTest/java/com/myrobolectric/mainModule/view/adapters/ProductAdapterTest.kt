@@ -1,17 +1,23 @@
 package com.myrobolectric.mainModule.view.adapters
 
+import android.view.View
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.PerformException
+import androidx.test.espresso.UiController
+import androidx.test.espresso.ViewAction
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.longClick
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions.*
+import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import com.myrobolectric.R
 import com.myrobolectric.mainModule.view.MainActivity
+import com.myrobolectric.mainModule.view.clickInChild
+import org.hamcrest.Matcher
 import org.hamcrest.Matchers.*
 import org.junit.Assert.fail
 import org.junit.Rule
@@ -57,5 +63,14 @@ class ProductAdapterTest {
         } catch (e: Exception) {
             assertThat((e as? PerformException), `is`(notNullValue()))
         }
+    }
+
+    //test:
+    @Test
+    fun cbFavorite_click_changesState(){
+        onView(withId(R.id.recyclerView))
+            .perform(actionOnItemAtPosition<ProductAdapter.ViewHolder>(
+                1, clickInChild(R.id.cbFavorite)
+            ))
     }
 }
