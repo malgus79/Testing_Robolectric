@@ -1,16 +1,24 @@
 package com.myrobolectric.mainModule.view.adapters
 
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.PerformException
+import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.longClick
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.espresso.contrib.RecyclerViewActions
+import androidx.test.espresso.contrib.RecyclerViewActions.*
+import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import com.myrobolectric.R
 import com.myrobolectric.mainModule.view.MainActivity
+import org.hamcrest.Matchers
+import org.hamcrest.Matchers.*
+import org.junit.Assert
+import org.junit.Assert.fail
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -31,5 +39,18 @@ class ProductAdapterTest {
         //test: verificar que el elemento seleccionado produzca un snackbar con el mismo nombre
         onView(withId(com.google.android.material.R.id.snackbar_text))
             .check(matches(withText("Queso")))
+    }
+
+    //test: verificar que al pulsar (long click) un elemento, se elimine
+    @Test
+    fun listItem_longClick_removeFromView(){
+        onView(withId(R.id.recyclerView))
+            .perform(
+                actionOnItem<ProductAdapter.ViewHolder>(
+                    hasDescendant(withText(containsString("Tijeras"))), longClick()),
+                scrollTo<ProductAdapter.ViewHolder>(
+                    hasDescendant(withText(containsString("Vino")))
+                )
+            )
     }
 }
