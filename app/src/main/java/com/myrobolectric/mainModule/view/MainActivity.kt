@@ -72,6 +72,8 @@ class MainActivity : AppCompatActivity(), OnClickListener {
      * */
     override fun onClick(product: Product) {
         viewModel.setWelcome(true)
+
+        Snackbar.make(binding.root, product.name, Snackbar.LENGTH_SHORT).show()
     }
 
     override fun onLongClick(product: Product) {
