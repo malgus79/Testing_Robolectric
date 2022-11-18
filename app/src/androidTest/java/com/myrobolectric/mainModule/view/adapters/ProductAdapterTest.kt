@@ -45,12 +45,20 @@ class ProductAdapterTest {
     @Test
     fun listItem_longClick_removeFromView(){
         onView(withId(R.id.recyclerView))
-            .perform(
-                actionOnItem<ProductAdapter.ViewHolder>(
+            .perform(actionOnItem<ProductAdapter.ViewHolder>(
                     hasDescendant(withText(containsString("Tijeras"))), longClick()),
                 scrollTo<ProductAdapter.ViewHolder>(
                     hasDescendant(withText(containsString("Vino")))
-                )
-            )
+                ))
+        try {
+            onView(withId(R.id.recyclerView))
+                .perform(scrollTo<ProductAdapter.ViewHolder>(
+                    hasDescendant(withText(containsString("Tijeras")))
+                ))
+
+            fail("Tijeras aún existe!!!")
+        } catch (e: Exception) {
+            assertThat((e as? PerformException), `is`(notNullValue()))
+        }
     }
 }
