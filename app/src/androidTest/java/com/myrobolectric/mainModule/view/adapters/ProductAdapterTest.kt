@@ -2,22 +2,17 @@ package com.myrobolectric.mainModule.view.adapters
 
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.PerformException
-import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.longClick
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.contrib.RecyclerViewActions.*
-import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import com.myrobolectric.R
 import com.myrobolectric.mainModule.view.MainActivity
-import org.hamcrest.Matchers
 import org.hamcrest.Matchers.*
-import org.junit.Assert
 import org.junit.Assert.fail
 import org.junit.Rule
 import org.junit.Test
@@ -52,9 +47,11 @@ class ProductAdapterTest {
                 ))
         try {
             onView(withId(R.id.recyclerView))
-                .perform(scrollTo<ProductAdapter.ViewHolder>(
-                    hasDescendant(withText(containsString("Tijeras")))
-                ))
+                .perform(
+                    scrollTo<ProductAdapter.ViewHolder>(
+                        hasDescendant(withText(containsString("Tijeras")))
+                    )
+                )
 
             fail("Tijeras aún existe!!!")
         } catch (e: Exception) {
